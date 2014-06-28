@@ -1,7 +1,7 @@
 import serial
 import sys
 
-sys.path.append('./lib')
+sys.path.append('./src')
 import yo
 import tumblr
 
@@ -35,6 +35,7 @@ def main_loop():
       counter = -(TRIGGER_TIMEOUT / MEASUREMENT_RATE)
       print 'CAT!'
       yo.send_yo()
+      tumblr.send_tumblr()
 
 
 
