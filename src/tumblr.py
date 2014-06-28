@@ -1,25 +1,13 @@
-from time import sleep
-import json
+from auth import secrets
+
 import requests
 import urlparse
 from tumblpy import Tumblpy
-import serial
 import cv
 
-# ser = serial.Serial('/dev/tty/thing', 9600)
-
-# while True:
-#   print ser.readline()
-#   sleep(1)
-
-environ = json.load(open("secrets.json"))
-
+environ = secrets()
 cv.NamedWindow("w1", cv.CV_WINDOW_AUTOSIZE)
 camera_index = 0
-
-def send_yo():
-  params = {"api_token": environ["yo_key"]}
-  r = requests.post("http://www.justyo.co/yoall/", data=params)
 
 def take_photo():
   capture = cv.CaptureFromCAM(camera_index)
@@ -63,5 +51,5 @@ def post_to_tumblr():
   photo = open('pic.jpg', 'rb')
   post = t.post('post', blog_url=blog_url, params={'type':'photo', 'caption': 'Test Caption', 'data': photo})
 
-send_yo()
-# post_to_tumblr()
+if __name__ == "__main__":
+  post_to_tumblr()

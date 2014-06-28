@@ -1,4 +1,9 @@
 import serial
+import sys
+
+sys.path.append('./lib')
+import yo
+import tumblr
 
 SERIAL_ADDRESS = '/dev/tty.usbmodemfd121'
 BAUD_RATE = 9600
@@ -29,6 +34,7 @@ def main_loop():
     if counter > (TRIGGER_THRESHOLD / MEASUREMENT_RATE):
       counter = -(TRIGGER_TIMEOUT / MEASUREMENT_RATE)
       print 'CAT!'
+      yo.send_yo()
 
 
 
